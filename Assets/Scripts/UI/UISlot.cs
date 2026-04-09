@@ -1,0 +1,16 @@
+using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class UISlot : MonoBehaviour, IDropHandler
+{
+    public Action onItemChange;
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        var otherItemTransform = eventData.pointerDrag.transform;
+        otherItemTransform.SetParent(transform);
+        otherItemTransform.localPosition = Vector3.zero;
+        onItemChange?.Invoke();
+    }
+}
